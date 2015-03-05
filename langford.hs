@@ -1,10 +1,15 @@
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE TupleSections       #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
+import Control.Applicative ((<$>))
 import qualified Data.Map as Map
 import Data.List (unfoldr)
+
+import System.Environment
     
-main2 :: Int -> IO ()
-main2 n = do
+main :: IO ()
+main = do
+  [(n :: Int)] <- map read <$> getArgs
   mapM_ (print . map snd . Map.toList) $ gl n
 
 gl :: Int -> [M]
