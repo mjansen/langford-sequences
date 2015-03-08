@@ -3,14 +3,13 @@
 
 typedef unsigned int letter;
 
-// #define N 12
+// #define N 12  // now defined with -D at compile time
 
 letter sequence[2*N];
 letter remaining[N];
 int    offset[N+1];       // for move i offset[i] is the next free slot in the sequence
 int    lindex[N];         // for move i lindex[i]  is the lindex in remaining of the chosen letter  (lindex[i] = sequence(offset[i]) - 1?
 int    nrChosen = 0;     // number of letters already chosen
-int    nrRemaining = N;  // nr of remaining letters
 
 bool makeChoiceIfPossible(int i)  // try ith entry in remaining to see if that move can be made nex, make it if so
 {
@@ -37,7 +36,6 @@ bool makeChoiceIfPossible(int i)  // try ith entry in remaining to see if that m
   while (sequence[o1] != 0)
     o1++;
   offset[nrChosen] = o1;
-  nrRemaining--;
   return true;
 }
 
@@ -50,7 +48,6 @@ void undoChoice()
   sequence[o] = 0;
   sequence[o + chosen + 1] = 0;
   remaining[i] = chosen;
-  nrRemaining++;
 }
 
 void initSequence()
@@ -60,7 +57,6 @@ void initSequence()
     remaining[i] = i+1;
   memset(offset, 0, sizeof offset);
   nrChosen = 0;
-  nrRemaining = N;
 }
 
 void print()
