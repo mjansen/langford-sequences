@@ -1,0 +1,4 @@
+gcc -D N=4 -O3 langford-in-c.cc: output segfaults
+gcc -D N=4 -O2 langford-in-c.cc: output ok
+g++ -D N=4 -O3 langford-in-c.cc: output ok
+g++ -D N=4 -O3 langford-in-c.cc: output ok
